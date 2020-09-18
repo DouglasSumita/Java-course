@@ -29,9 +29,16 @@ public class PhysicalPerson extends Person {
 	@Override
 	public Double tax() {
 		Double tax = MINIMUM_TAX;
+		
 		if (getAnnualIncome() > MAXIMUM_ANNUAL_INCOME_FOR_TAX_15_PERCENT) {
 			tax = NORMAL_TAX;
 		}
-		return getAnnualIncome() * tax - (healthSpending * PERCENTAGE_OF_MEDICAL_EXPENSES) ;
+		
+		Double amount = getAnnualIncome() * tax - (healthSpending * PERCENTAGE_OF_MEDICAL_EXPENSES);
+		
+		if (amount < 0) {
+			amount = 0.0;
+		}
+		return amount;
 	}
 }
